@@ -22,11 +22,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);
 
   // ── Configuración programador ─────────────────────────────
-  readonly WHATSAPP_NUMBER = '542921421616';
+  readonly WHATSAPP_NUMBER = '542914746159';
   readonly BASE_GREETING = 'Holaa, quiero comprar entradas para';
-  readonly EVENT_NAME = 'Noche de Máscaras';
+  readonly EVENT_NAME = 'Katraska';
   readonly EVENT_DATE_LABEL = 'Octubre 2026 · Monte Hermoso';
-  readonly EVENT_VENUE = 'Monte Hermoso · te pasamos la dirección por WhatsApp';
+  readonly EVENT_VENUE = 'Monte Hermoso';
   readonly EVENT_TARGET = new Date('2026-10-17T23:59:00-03:00').getTime();
 
   tickets = signal<Ticket[]>([

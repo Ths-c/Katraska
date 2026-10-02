@@ -181,7 +181,7 @@
           <p class="text-xs text-[#ede6d6]/45 mt-1">Todavía no elegiste cantidades — tocá + arriba.</p>
         }
       </div>
-      <button (click)="reserve()" class="btn-gold rounded-full px-8 py-4 font-bold text-sm tracking-wide w-full md:w-auto">CONTINUAR → RESERVAR POR WHATSAPP</button>
+      <button (click)="reserve()" class="btn-gold rounded-full px-8 py-4 font-bold text-sm tracking-wide w-full md:w-auto">CONTINUAR → CONTACTAR CON NUESTROS PROMOTORES</button>
     </div>
   </div>
 </section>
@@ -260,7 +260,7 @@
           <pre class="whitespace-pre-wrap text-[13px] leading-relaxed text-[#d8f3e2] font-sans">{{ whatsappMessage() }}</pre>
         </div>
         <div class="mt-5 flex flex-col gap-3">
-          <button (click)="confirmWhatsApp()" class="btn-whatsapp rounded-full px-6 py-4 font-bold text-white text-sm tracking-wide">📲 ENVIAR PEDIDO POR WHATSAPP ({{ totalTickets() }} 🎟️)</button>
+          <button (click)="confirmWhatsApp()" class="btn-whatsapp rounded-full px-6 py-4 font-bold text-white text-sm tracking-wide">📲 CONTACTAR PROMOTOR ({{ totalTickets() }} 🎟️)</button>
           <div class="flex gap-3">
             <button (click)="copyMessage()" class="flex-1 rounded-full px-4 py-3 text-xs border border-[#1faa55]/50 text-[#c8f3e2] hover:bg-[#1faa55]/15 transition">📋 COPIAR MENSAJE</button>
             <button (click)="showPreview.set(!showPreview())" class="flex-1 rounded-full px-4 py-3 text-xs border border-white/15 text-white/70 hover:border-white/40 transition">{{ showPreview() ? 'OCULTAR AYUDA' : '¿CÓMO SIGUE?' }}</button>
