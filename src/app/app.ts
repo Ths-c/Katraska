@@ -27,20 +27,20 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   readonly EVENT_NAME = 'Noche de Máscaras';
   readonly EVENT_DATE_LABEL = 'Octubre 2026 · Monte Hermoso';
   readonly EVENT_VENUE = 'Monte Hermoso · te pasamos la dirección por WhatsApp';
-  readonly EVENT_TARGET = new Date('2026-10-31T23:59:00-03:00').getTime();
+  readonly EVENT_TARGET = new Date('2026-10-17T23:59:00-03:00').getTime();
 
   tickets = signal<Ticket[]>([
     {
       id: 'general',
-      name: 'Entrada General',
+      name: 'Primer preventa',
       tagline: 'Para vivir la noche completa',
-      price: 15000,
+      price: 10000,
       mask: '🎭',
-      benefits: ['Acceso toda la noche 23:59 – 05:00', 'Pista principal + barra', 'DJs toda la noche', 'Antifaz de cortesía en puerta', 'Guardarropa'],
+      benefits: ['Acceso toda la noche 12 en adelante', 'DJs toda la noche'],
     },
   ]);
 
-  quantities = signal<Record<string, number>>({ general: 2 });
+  quantities = signal<Record<string, number>>({ general: 1 });
   buyerName = signal('');
   buyerDni = signal('');
   showPreview = signal(false);
@@ -56,11 +56,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private observer: IntersectionObserver | null = null;
 
   faqs = [
-    { q: '¿Cómo compro si no hay pago online?', a: 'Elegís la cantidad acá, tocás “Reservar por WhatsApp” y se abre el chat con tu pedido listo. Te confirmamos disponibilidad, te pasamos el alias, transferís y tu lugar queda guardado por 24hs.' },
-    { q: '¿El antifaz es obligatorio?', a: 'No es obligatorio, pero suma un montón: la temática es Noche de Máscaras. Si traés el tuyo buenísimo, y si no, te damos uno de cortesía en puerta.' },
-    { q: '¿Dónde es la fiesta?', a: 'En Monte Hermoso, en octubre. La dirección exacta te la pasamos por WhatsApp cuando confirmás tu reserva. Hay estacionamiento y guardarropa.' },
-    { q: '¿Puedo cambiar el titular o revender mi entrada?', a: 'Sí, podés cambiar el nombre una vez sin costo avisando por WhatsApp con anticipación. En puerta pedimos DNI.' },
-    { q: '¿Hay dress code?', a: 'Bien de noche: negro + dorado. Evitá ropa deportiva, shorts y ojotas.' },
+    { q: '¿Cómo compro si no hay pago online?', a: 'Elegís la cantidad acá, tocás “Reservar por WhatsApp” y se abre el chat con tu pedido listo. Te confirmamos disponibilidad, te pasamos el alias, transferís y tu lugar queda guardado.' },
+    { q: '¿El antifaz es obligatorio?', a: 'Si. Y hay una sorpresa al final para los que tengan puesto uno...' },
+    { q: '¿Dónde es la fiesta?', a: 'En Monte Hermoso, en octubre. La dirección exacta te la pasamos por WhatsApp cuando confirmás tu reserva.' },
+    { q: '¿Puedo cambiar el titular o revender mi entrada?', a: 'Sí, podés cambiar el nombre una vez sin costo avisando por WhatsApp con anticipación. En puerta pedimos DNI.' }
   ];
 
   totalTickets = computed(() => Object.values(this.quantities()).reduce((a, b) => a + b, 0));
