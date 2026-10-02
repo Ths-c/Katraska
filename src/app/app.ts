@@ -25,39 +25,22 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   readonly WHATSAPP_NUMBER = '542921421616';
   readonly BASE_GREETING = 'Holaa, quiero comprar entradas para';
   readonly EVENT_NAME = 'Noche de Máscaras';
-  readonly EVENT_DATE_LABEL = '31 de Octubre 2026 · 23:59hs';
-  readonly EVENT_VENUE = 'Sala Secreta · Bahía Blanca';
+  readonly EVENT_DATE_LABEL = 'Octubre 2026 · Monte Hermoso';
+  readonly EVENT_VENUE = 'Monte Hermoso · te pasamos la dirección por WhatsApp';
   readonly EVENT_TARGET = new Date('2026-10-31T23:59:00-03:00').getTime();
 
   tickets = signal<Ticket[]>([
     {
       id: 'general',
-      name: 'General Enmascarada',
-      tagline: 'El acceso al misterio',
+      name: 'Entrada General',
+      tagline: 'Para vivir la noche completa',
       price: 15000,
       mask: '🎭',
-      benefits: ['Acceso general 23:59 – 05:00', 'Antifaz de cortesía', 'Guardarropa liberado', 'Pista principal + barra'],
-    },
-    {
-      id: 'vip',
-      name: 'VIP Dorada',
-      tagline: 'La favorita de la noche',
-      price: 35000,
-      mask: '👑',
-      featured: true,
-      benefits: ['Todo lo General', 'Acceso zona VIP elevada', '2 consumiciones premium', 'Fila prioritaria secreta', 'Foto ritual con antifaz dorado'],
-    },
-    {
-      id: 'backstage',
-      name: 'Backstage Prohibido',
-      tagline: 'Solo 30 elegidos',
-      price: 60000,
-      mask: '🗝️',
-      benefits: ['Todo lo VIP', 'Acceso camarines + artistas', 'Barra libre 00:00 – 02:00', 'Antifaz negro edición limitada', 'After secreto hasta el amanecer'],
+      benefits: ['Acceso toda la noche 23:59 – 05:00', 'Pista principal + barra', 'DJs toda la noche', 'Antifaz de cortesía en puerta', 'Guardarropa'],
     },
   ]);
 
-  quantities = signal<Record<string, number>>({ general: 0, vip: 2, backstage: 0 });
+  quantities = signal<Record<string, number>>({ general: 2 });
   buyerName = signal('');
   buyerDni = signal('');
   showPreview = signal(false);
@@ -73,11 +56,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private observer: IntersectionObserver | null = null;
 
   faqs = [
-    { q: '¿Cómo compro si no hay pago online?', a: 'Elegís tus entradas en esta web, tocás “Reservar por WhatsApp” y se abre un chat con tu pedido ya redactado. Nuestro equipo te confirma disponibilidad y te pasa alias/transferencia. Tu lugar queda guardado por 24hs.' },
-    { q: '¿El antifaz es obligatorio?', a: 'Sí. Es una fiesta enmascarada. Si venís con tu propio antifaz negro o dorado, entrás directo al ritual de bienvenida. Si no tenés, te damos uno de cortesía en puerta (General) o edición limitada (VIP/Backstage).' },
-    { q: '¿Dónde es? ¿Por qué dice Sala Secreta?', a: 'La ubicación exacta se revela solo por WhatsApp 24hs antes a quienes reservaron. Es parte del misterio Katraska. Está en Bahía Blanca, con estacionamiento y guardarropa.' },
-    { q: '¿Puedo transferir o revender mi entrada?', a: 'Podés cambiar el nombre del titular una vez sin costo avisando por WhatsApp con 48hs de antelación. Pedimos DNI en puerta para evitar falsificaciones.' },
-    { q: '¿Hay dress code?', a: 'Negro total + dorado. No se permite ropa deportiva, shorts ni ojotas. El antifaz hace el resto.' },
+    { q: '¿Cómo compro si no hay pago online?', a: 'Elegís la cantidad acá, tocás “Reservar por WhatsApp” y se abre el chat con tu pedido listo. Te confirmamos disponibilidad, te pasamos el alias, transferís y tu lugar queda guardado por 24hs.' },
+    { q: '¿El antifaz es obligatorio?', a: 'No es obligatorio, pero suma un montón: la temática es Noche de Máscaras. Si traés el tuyo buenísimo, y si no, te damos uno de cortesía en puerta.' },
+    { q: '¿Dónde es la fiesta?', a: 'En Monte Hermoso, en octubre. La dirección exacta te la pasamos por WhatsApp cuando confirmás tu reserva. Hay estacionamiento y guardarropa.' },
+    { q: '¿Puedo cambiar el titular o revender mi entrada?', a: 'Sí, podés cambiar el nombre una vez sin costo avisando por WhatsApp con anticipación. En puerta pedimos DNI.' },
+    { q: '¿Hay dress code?', a: 'Bien de noche: negro + dorado. Evitá ropa deportiva, shorts y ojotas.' },
   ];
 
   totalTickets = computed(() => Object.values(this.quantities()).reduce((a, b) => a + b, 0));
@@ -119,7 +102,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       try {
         const saved = localStorage.getItem('katraska-cart');
-        if (saved) this.quantities.set(JSON.parse(saved));
+        if (saved) {
+          const parsed = JSON.parse(saved) as Record<string, number>;
+          const g = Math.max(0, Math.min(10, Number(parsed['general'] ?? 2) || 0));
+          this.quantities.set({ general: g });
+        }
         const savedName = localStorage.getItem('katraska-name');
         if (savedName) this.buyerName.set(savedName);
       } catch { /* noop */ }
