@@ -1,0 +1,5 @@
+/* estilos locales del componente (el grueso está en styles.css) */
+:host {
+  display: block;
+  background: #07070c;
+}

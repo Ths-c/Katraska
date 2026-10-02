@@ -1,0 +1,324 @@
+<!-- TOAST -->
+@if (toast()) {
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] glass gold-border rounded-full px-6 py-3 text-sm tracking-wide shadow-2xl whitespace-nowrap">
+    {{ toast() }}
+  </div>
+}
+
+<!-- NAV -->
+<nav class="fixed top-0 inset-x-0 z-50 glass border-b border-[#c9a86a]/20">
+  <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3">
+      <span class="text-3xl mask-glow">🎭</span>
+      <span class="font-display font-800 tracking-[0.35em] text-lg gold-text font-bold">KATRASKA</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-[13px] tracking-[0.2em] text-[#ede6d6]/70">
+      <a href="#evento" class="hover:text-[#c9a86a] transition">LA NOCHE</a>
+      <a href="#entradas" class="hover:text-[#c9a86a] transition">ENTRADAS</a>
+      <a href="#ritual" class="hover:text-[#c9a86a] transition">RITUAL</a>
+      <a href="#faq" class="hover:text-[#c9a86a] transition">FAQ</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="hidden sm:inline text-xs text-[#ede6d6]/60">{{ totalTickets() }} 🎟️ · {{ formatPrice(totalPrice()) }}</span>
+      <a href="#entradas" class="btn-gold rounded-full px-5 py-2 text-xs font-bold tracking-[0.15em]">COMPRAR</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="top" class="relative min-h-screen flex items-center justify-center overflow-hidden vignette pt-20">
+  <canvas id="dust" class="absolute inset-0 w-full h-full"></canvas>
+  <div class="smoke-layer"></div>
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 80% 55% at 50% 38%, rgba(139,30,46,0.22), transparent 70%), radial-gradient(ellipse 60% 40% at 50% 110%, rgba(201,168,106,0.12), transparent 70%)"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-5 text-center">
+    <p class="reveal text-[11px] md:text-xs tracking-[0.5em] text-[#c9a86a] mb-6">ORGANIZADOR DE FIESTAS · DESDE LAS SOMBRAS</p>
+
+    <!-- ANTIFAZ SVG -->
+    <div class="reveal flex justify-center mb-6">
+      <svg class="mask-glow w-64 md:w-96 h-auto" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Antifaz Katraska">
+        <path d="M10 90 C60 20, 140 10, 200 70 C260 10, 340 20, 390 90 C340 155, 260 145, 200 100 C140 145, 60 155, 10 90 Z" fill="#0d0d16" stroke="#c9a86a" stroke-width="3"/>
+        <path d="M10 90 C60 20, 140 10, 200 70 C260 10, 340 20, 390 90" fill="none" stroke="#f0d9a8" stroke-width="1" opacity="0.6"/>
+        <ellipse cx="115" cy="85" rx="42" ry="28" fill="#000" stroke="#c9a86a" stroke-width="1.5"/>
+        <ellipse cx="285" cy="85" rx="42" ry="28" fill="#000" stroke="#c9a86a" stroke-width="1.5"/>
+        <ellipse cx="115" cy="85" rx="42" ry="28" fill="url(#eyeGlow)" opacity="0.35"/>
+        <ellipse cx="285" cy="85" rx="42" ry="28" fill="url(#eyeGlow)" opacity="0.35"/>
+        <defs>
+          <radialGradient id="eyeGlow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#8b1e2e"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+        </defs>
+        <!-- filigrana -->
+        <path d="M40 90 q20 -25 45 -20 M360 90 q-20 -25 -45 -20 M200 70 q0 15 -8 22 M200 70 q0 15 8 22" stroke="#c9a86a" stroke-width="1.2" opacity="0.8" fill="none"/>
+        <circle cx="200" cy="98" r="6" fill="#8b1e2e" stroke="#f0d9a8" stroke-width="1"/>
+        <circle cx="65" cy="70" r="2.5" fill="#c9a86a"/><circle cx="90" cy="55" r="1.8" fill="#c9a86a"/><circle cx="335" cy="70" r="2.5" fill="#c9a86a"/><circle cx="310" cy="55" r="1.8" fill="#c9a86a"/>
+        <circle cx="150" cy="120" r="2" fill="#c9a86a" opacity="0.9"/><circle cx="250" cy="120" r="2" fill="#c9a86a" opacity="0.9"/>
+      </svg>
+    </div>
+
+    <h1 class="reveal font-display font-black leading-[0.95] text-6xl md:text-8xl tracking-tight">
+      <span class="gold-text">KATRASKA</span>
+    </h1>
+    <p class="reveal font-display italic text-xl md:text-2xl text-[#ede6d6]/80 mt-3 tracking-wide">Donde nadie es quien dice ser</p>
+
+    <p class="reveal max-w-2xl mx-auto mt-6 text-[#ede6d6]/65 text-sm md:text-base leading-relaxed">
+      Fiestas enmascaradas, sala secreta y una sola noche al mes.
+      Sin filas eternas ni entradas falsas: reservás acá y cerrás por WhatsApp en 1 minuto.
+    </p>
+
+    <!-- COUNTDOWN -->
+    <div class="reveal mt-8 inline-flex items-center gap-2 md:gap-4 glass gold-border rounded-2xl px-5 md:px-8 py-4">
+      <div class="text-center px-2"><div class="font-display text-3xl md:text-4xl font-bold gold-text">{{ days() }}</div><div class="text-[10px] tracking-[0.3em] text-[#ede6d6]/60 mt-1">DÍAS</div></div>
+      <span class="text-[#c9a86a] text-2xl">:</span>
+      <div class="text-center px-2"><div class="font-display text-3xl md:text-4xl font-bold gold-text">{{ hours() }}</div><div class="text-[10px] tracking-[0.3em] text-[#ede6d6]/60 mt-1">HORAS</div></div>
+      <span class="text-[#c9a86a] text-2xl">:</span>
+      <div class="text-center px-2"><div class="font-display text-3xl md:text-4xl font-bold gold-text">{{ minutes() }}</div><div class="text-[10px] tracking-[0.3em] text-[#ede6d6]/60 mt-1">MIN</div></div>
+      <span class="text-[#c9a86a] text-2xl">:</span>
+      <div class="text-center px-2"><div class="font-display text-3xl md:text-4xl font-bold text-[#ff5d73]">{{ seconds() }}</div><div class="text-[10px] tracking-[0.3em] text-[#ede6d6]/60 mt-1">SEG</div></div>
+    </div>
+    <p class="reveal mt-3 text-xs tracking-[0.25em] text-[#ede6d6]/50">{{ EVENT_NAME.toUpperCase() }} · {{ EVENT_DATE_LABEL.toUpperCase() }}</p>
+
+    <div class="reveal mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#entradas" class="btn-gold rounded-full px-9 py-4 font-bold tracking-[0.15em] text-sm w-full sm:w-auto text-center">CONSEGUIR ENTRADAS 🎟️</a>
+      <a [href]="whatsappUrl()" target="_blank" rel="noopener" class="btn-whatsapp rounded-full px-9 py-4 font-bold tracking-[0.1em] text-sm text-white w-full sm:w-auto text-center">💬 HABLAR POR WHATSAPP</a>
+    </div>
+    <p class="reveal mt-4 text-[11px] text-[#ede6d6]/40">100% frontend · Sin cuenta · Sin tarjeta · Confirmás por chat</p>
+  </div>
+
+  <a href="#evento" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-[#c9a86a] animate-bounce text-2xl">﹀</a>
+</header>
+
+<!-- CINTA -->
+<div class="border-y border-[#c9a86a]/20 bg-[#0d0d16] py-3 overflow-hidden whitespace-nowrap text-[12px] tracking-[0.35em] text-[#c9a86a]/80">
+  <div class="inline-block animate-pulse">🎭 ANTIFAZ OBLIGATORIO &nbsp;·&nbsp; SALA SECRETA &nbsp;·&nbsp; DRESS CODE NEGRO + DORADO &nbsp;·&nbsp; SOLO 400 ALMAS &nbsp;·&nbsp; KATRASKA &nbsp;·&nbsp; 🎭 ANTIFAZ OBLIGATORIO &nbsp;·&nbsp; SALA SECRETA &nbsp;·&nbsp; SOLO 400 ALMAS &nbsp;·&nbsp;</div>
+</div>
+
+<!-- EVENTO -->
+<section id="evento" class="relative max-w-7xl mx-auto px-5 py-20 md:py-28">
+  <div class="grid md:grid-cols-2 gap-10 items-stretch">
+    <div class="reveal glass gold-border rounded-3xl p-8 md:p-10 relative overflow-hidden">
+      <div class="smoke-layer opacity-60"></div>
+      <p class="relative text-[11px] tracking-[0.4em] text-[#c9a86a]">PRÓXIMA INVOCACIÓN</p>
+      <h2 class="relative font-display text-4xl md:text-5xl font-bold mt-3 leading-tight">{{ EVENT_NAME }}<br><span class="gold-text">Edición Medianoche</span></h2>
+      <div class="relative mt-6 space-y-3 text-sm text-[#ede6d6]/75">
+        <p>📅 <strong class="text-[#ede6d6]">{{ EVENT_DATE_LABEL }}</strong></p>
+        <p>📍 <strong class="text-[#ede6d6]">{{ EVENT_VENUE }}</strong> <span class="text-[#c9a86a]">(ubicación exacta por WhatsApp)</span></p>
+        <p>🌙 Pista principal · Patio de máscaras · Cámara VIP · After secreto</p>
+      </div>
+      <div class="relative mt-6 flex flex-wrap gap-2 text-[11px]">
+        <span class="px-3 py-1 rounded-full border border-[#c9a86a]/40 text-[#c9a86a]">+18 con DNI</span>
+        <span class="px-3 py-1 rounded-full border border-[#c9a86a]/40 text-[#c9a86a]">Antifaz incluido</span>
+        <span class="px-3 py-1 rounded-full border border-[#8b1e2e] text-[#ff8fa0]">Quedan pocas VIP</span>
+      </div>
+      <div class="relative mt-8 flex gap-4">
+        <a href="#entradas" class="btn-gold rounded-full px-7 py-3 text-sm font-bold">VER ENTRADAS</a>
+        <a href="#ritual" class="rounded-full px-7 py-3 text-sm border border-[#ede6d6]/25 hover:border-[#c9a86a] hover:text-[#c9a86a] transition">El ritual</a>
+      </div>
+    </div>
+
+    <div class="reveal grid grid-cols-2 gap-4">
+      <div class="rounded-3xl p-6 bg-gradient-to-b from-[#1a1a28] to-[#0a0a12] gold-border flex flex-col justify-between min-h-[190px]">
+        <span class="text-4xl">🕯️</span>
+        <div><p class="font-display font-bold text-lg">400 almas</p><p class="text-xs text-[#ede6d6]/55 mt-1">Aforo íntimo. Cuando se agota, no hay puerta.</p></div>
+      </div>
+      <div class="rounded-3xl p-6 bg-gradient-to-b from-[#2a1015] to-[#0a0a12] border border-[#8b1e2e]/50 flex flex-col justify-between min-h-[190px]">
+        <span class="text-4xl">🥂</span>
+        <div><p class="font-display font-bold text-lg">Barra premium</p><p class="text-xs text-[#ede6d6]/55 mt-1">Coctelería de autor hasta las 05:00.</p></div>
+      </div>
+      <div class="rounded-3xl p-6 bg-gradient-to-b from-[#14141f] to-[#0a0a12] gold-border flex flex-col justify-between min-h-[190px]">
+        <span class="text-4xl">🎧</span>
+        <div><p class="font-display font-bold text-lg">3 DJs secretos</p><p class="text-xs text-[#ede6d6]/55 mt-1">Line-up revelado a medianoche.</p></div>
+      </div>
+      <div class="rounded-3xl p-6 bg-gradient-to-b from-[#1c1a0e] to-[#0a0a12] gold-border flex flex-col justify-between min-h-[190px]">
+        <span class="text-4xl">🔮</span>
+        <div><p class="font-display font-bold text-lg">Ritual 00:00</p><p class="text-xs text-[#ede6d6]/55 mt-1">Todas las luces caen. Solo máscaras.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTRADAS -->
+<section id="entradas" class="relative py-20 bg-[#08080f] border-y border-[#c9a86a]/15 overflow-hidden">
+  <div class="smoke-layer opacity-40"></div>
+  <div class="relative max-w-7xl mx-auto px-5">
+    <p class="reveal text-center text-[11px] tracking-[0.45em] text-[#c9a86a]">ELIGE TU MÁSCARA</p>
+    <h2 class="reveal text-center font-display text-4xl md:text-6xl font-black mt-3">Entradas <span class="gold-text">para pecar</span></h2>
+    <p class="reveal text-center text-[#ede6d6]/60 text-sm mt-4 max-w-xl mx-auto">Sumá y restá. El total se calcula solo en tu navegador. Nada se cobra acá: el pago se confirma por WhatsApp.</p>
+
+    <div class="mt-12 grid md:grid-cols-3 gap-6">
+      @for (t of tickets(); track t.id) {
+        <div class="reveal card-ticket rounded-3xl p-7 relative flex flex-col {{ t.featured ? 'bg-gradient-to-b from-[#221a0e] to-[#0d0d16] border-2 border-[#c9a86a] shadow-[0_0_50px_-10px_rgba(201,168,106,0.5)]' : 'glass gold-border' }}">
+          @if (t.featured) {
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#f0d9a8] to-[#c9a86a] text-black text-[10px] font-bold tracking-[0.25em] px-4 py-1 rounded-full">MÁS ELEGIDA</span>
+          }
+          <div class="text-5xl">{{ t.mask }}</div>
+          <h3 class="font-display text-2xl font-bold mt-4">{{ t.name }}</h3>
+          <p class="text-xs italic text-[#c9a86a]/90 mt-1">{{ t.tagline }}</p>
+          <p class="font-display text-4xl font-black mt-4 gold-text">{{ formatPrice(t.price) }}</p>
+          <p class="text-[11px] text-[#ede6d6]/45 -mt-1">ARS por persona</p>
+          <ul class="mt-5 space-y-2 text-[13px] text-[#ede6d6]/75 flex-1">
+            @for (b of t.benefits; track b) {
+              <li class="flex gap-2"><span class="text-[#c9a86a]">✦</span> {{ b }}</li>
+            }
+          </ul>
+          <div class="mt-6 flex items-center justify-between bg-black/40 rounded-2xl p-2 border border-white/10">
+            <button (click)="dec(t.id)" class="w-11 h-11 rounded-xl text-2xl hover:bg-white/10 transition" aria-label="Quitar">−</button>
+            <span class="font-display text-2xl font-bold">{{ quantities()[t.id] ?? 0 }}</span>
+            <button (click)="inc(t.id)" class="w-11 h-11 rounded-xl text-2xl bg-[#c9a86a]/20 text-[#f0d9a8] hover:bg-[#c9a86a]/40 transition" aria-label="Agregar">+</button>
+          </div>
+          <p class="text-center text-xs mt-2 text-[#ede6d6]/50">Subtotal: <strong class="text-[#ede6d6]">{{ formatPrice((quantities()[t.id] ?? 0) * t.price) }}</strong></p>
+        </div>
+      }
+    </div>
+
+    <!-- RESUMEN STICKY -->
+    <div class="reveal mt-8 glass gold-border rounded-2xl p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="text-center md:text-left">
+        <p class="text-xs tracking-[0.25em] text-[#ede6d6]/55">TU PEDIDO</p>
+        <p class="font-display text-2xl font-bold mt-1">{{ totalTickets() }} entradas · <span class="gold-text">{{ formatPrice(totalPrice()) }}</span></p>
+        @if (detailLines().length) {
+          <p class="text-xs text-[#ede6d6]/60 mt-1">{{ detailLines().join(' | ') }}</p>
+        } @else {
+          <p class="text-xs text-[#ede6d6]/45 mt-1">Todavía no elegiste cantidades — tocá + arriba.</p>
+        }
+      </div>
+      <button (click)="reserve()" class="btn-gold rounded-full px-8 py-4 font-bold text-sm tracking-wide w-full md:w-auto">CONTINUAR → RESERVAR POR WHATSAPP</button>
+    </div>
+  </div>
+</section>
+
+<!-- RITUAL / MANIFIESTO -->
+<section id="ritual" class="max-w-7xl mx-auto px-5 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+  <div class="reveal">
+    <p class="text-[11px] tracking-[0.45em] text-[#c9a86a]">MANIFIESTO KATRASKA</p>
+    <h2 class="font-display text-4xl md:text-5xl font-black mt-3 leading-tight">La noche que <span class="gold-text">nadie te reconoce</span> y todos te recuerdan</h2>
+    <div class="mt-6 space-y-5 text-[#ede6d6]/70 text-sm leading-relaxed">
+      <p><strong class="text-[#f0d9a8]">00:00 — El Apagón.</strong> Se cortan las luces. Solo velas y máscaras. Nadie filma. Nadie juzga.</p>
+      <p><strong class="text-[#f0d9a8]">Dress code estricto:</strong> negro + dorado + antifaz. Sin antifaz no hay ritual.</p>
+      <p><strong class="text-[#f0d9a8]">Sala secreta.</strong> La dirección llega por WhatsApp el día del evento. Si filtrás la ubicación, quedás baneado del círculo.</p>
+    </div>
+    <div class="mt-8 grid grid-cols-3 gap-3 text-center">
+      <div class="rounded-2xl border border-white/10 p-4"><p class="font-display text-2xl font-bold gold-text">12+</p><p class="text-[11px] text-[#ede6d6]/55 mt-1">fiestas sold out</p></div>
+      <div class="rounded-2xl border border-white/10 p-4"><p class="font-display text-2xl font-bold gold-text">5k</p><p class="text-[11px] text-[#ede6d6]/55 mt-1">enmascarados</p></div>
+      <div class="rounded-2xl border border-white/10 p-4"><p class="font-display text-2xl font-bold gold-text">0</p><p class="text-[11px] text-[#ede6d6]/55 mt-1">filtraciones</p></div>
+    </div>
+  </div>
+  <div class="reveal rounded-3xl overflow-hidden gold-border bg-gradient-to-br from-[#15151f] via-[#0d0d16] to-[#1f0f14] p-8 relative">
+    <div class="smoke-layer"></div>
+    <div class="relative">
+      <p class="font-display italic text-xl text-center text-[#f0d9a8]">“Vinimos extraños,<br>nos fuimos leyenda.”</p>
+      <div class="mt-6 space-y-3">
+        <div class="flex gap-3 items-start bg-black/30 rounded-2xl p-4 border border-white/5"><span>🌙</span><p class="text-xs text-[#ede6d6]/70"><strong>Camila R.</strong> — “Pensé que era una fiesta más. Terminé llorando en el ritual de las 00:00. Nunca viví algo así.”</p></div>
+        <div class="flex gap-3 items-start bg-black/30 rounded-2xl p-4 border border-white/5"><span>🖤</span><p class="text-xs text-[#ede6d6]/70"><strong>Diego M. VIP.</strong> — “Reservé por WhatsApp en 2 minutos. En puerta dijeron mi nombre y me pusieron el antifaz dorado. Nivel europeo.”</p></div>
+        <div class="flex gap-3 items-start bg-black/30 rounded-2xl p-4 border border-white/5"><span>✨</span><p class="text-xs text-[#ede6d6]/70"><strong>Lucía & Fran Backstage.</strong> — “El after secreto vale cada peso. No puedo contar más. Regla nº1.”</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKOUT WHATSAPP -->
+<section id="checkout" class="relative py-20 bg-[#08080f] border-y border-[#1faa55]/20 overflow-hidden">
+  <div class="max-w-5xl mx-auto px-5">
+    <p class="reveal text-center text-[11px] tracking-[0.45em] text-[#1faa55]">PASO FINAL · SOLO FRONTEND</p>
+    <h2 class="reveal text-center font-display text-4xl md:text-5xl font-black mt-3">Reservá por <span class="text-[#25d366]">WhatsApp</span></h2>
+    <p class="reveal text-center text-[#ede6d6]/60 text-sm mt-3">Completá tu nombre, revisá el mensaje preescrito por Katraska y envialo. Sin crear cuentas.</p>
+
+    <div class="reveal mt-10 grid md:grid-cols-2 gap-6">
+      <div class="glass gold-border rounded-3xl p-7">
+        <h3 class="font-display font-bold text-xl">1 · Tus datos</h3>
+        <label class="block mt-5 text-xs tracking-[0.2em] text-[#ede6d6]/55">NOMBRE COMPLETO *</label>
+        <input [ngModel]="buyerName()" (ngModelChange)="onNameChange($event)" placeholder="Ej: Valentina Rossi" class="mt-2 w-full bg-black/50 border border-white/10 focus:border-[#c9a86a] outline-none rounded-2xl px-4 py-3 text-sm placeholder:text-white/25 transition" />
+        <label class="block mt-4 text-xs tracking-[0.2em] text-[#ede6d6]/55">DNI (PARA PUERTA, OPCIONAL)</label>
+        <input [ngModel]="buyerDni()" (ngModelChange)="buyerDni.set($event)" placeholder="Ej: 40123456" inputmode="numeric" class="mt-2 w-full bg-black/50 border border-white/10 focus:border-[#c9a86a] outline-none rounded-2xl px-4 py-3 text-sm placeholder:text-white/25 transition" />
+        <div class="mt-5 rounded-2xl bg-black/40 border border-white/10 p-4 text-sm">
+          <p class="text-xs tracking-[0.2em] text-[#ede6d6]/50">RESUMEN</p>
+          @if (detailLines().length) {
+            @for (l of detailLines(); track l) { <p class="mt-1 text-[#ede6d6]/85">{{ l }}</p> }
+            <p class="mt-3 font-display text-xl font-bold gold-text">Total: {{ formatPrice(totalPrice()) }}</p>
+          } @else {
+            <p class="mt-2 text-[#ede6d6]/50 text-[13px]">Subí arriba y tocá + para ver tu total acá.</p>
+          }
+        </div>
+        <p class="mt-4 text-[11px] text-[#ede6d6]/40 leading-relaxed">Al confirmar se abrirá <strong>wa.me/{{ WHATSAPP_NUMBER }}</strong> con el texto ya escrito. Solo tenés que darle a enviar.</p>
+      </div>
+
+      <div class="rounded-3xl p-7 bg-[#0e1f16] border border-[#1faa55]/40 relative overflow-hidden flex flex-col">
+        <h3 class="font-display font-bold text-xl text-[#c8f5d6]">2 · Mensaje preescrito ✍️</h3>
+        <p class="text-[11px] text-[#9fd8b4]/70 mt-1">Esto es exactamente lo que recibirá Katraska:</p>
+        <div class="mt-4 flex-1 bg-[#07130c] rounded-2xl p-4 border border-[#1faa55]/25">
+          <pre class="whitespace-pre-wrap text-[13px] leading-relaxed text-[#d8f3e2] font-sans">{{ whatsappMessage() }}</pre>
+        </div>
+        <div class="mt-5 flex flex-col gap-3">
+          <button (click)="confirmWhatsApp()" class="btn-whatsapp rounded-full px-6 py-4 font-bold text-white text-sm tracking-wide">📲 ENVIAR PEDIDO POR WHATSAPP ({{ totalTickets() }} 🎟️)</button>
+          <div class="flex gap-3">
+            <button (click)="copyMessage()" class="flex-1 rounded-full px-4 py-3 text-xs border border-[#1faa55]/50 text-[#c8f3e2] hover:bg-[#1faa55]/15 transition">📋 COPIAR MENSAJE</button>
+            <button (click)="showPreview.set(!showPreview())" class="flex-1 rounded-full px-4 py-3 text-xs border border-white/15 text-white/70 hover:border-white/40 transition">{{ showPreview() ? 'OCULTAR AYUDA' : '¿CÓMO SIGUE?' }}</button>
+          </div>
+          @if (showPreview()) {
+            <div class="text-[12px] text-[#9fd8b4]/85 leading-relaxed bg-[#1faa55]/10 rounded-2xl p-4 border border-[#1faa55]/20">
+              1️⃣ Se abre WhatsApp → tocás enviar.<br>
+              2️⃣ Te responden con disponibilidad + alias.<br>
+              3️⃣ Transferís y te llega tu código + ubicación secreta.<br>
+              4️⃣ El 31/10 mostrás DNI + código con tu antifaz 🖤
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="max-w-4xl mx-auto px-5 py-20">
+  <p class="reveal text-center text-[11px] tracking-[0.45em] text-[#c9a86a]">PREGUNTAS DE LA CRIPTA</p>
+  <h2 class="reveal text-center font-display text-4xl md:text-5xl font-black mt-3">Antes de <span class="gold-text">enmascararte</span></h2>
+  <div class="mt-10 space-y-3">
+    @for (f of faqs; track f.q; let i = $index) {
+      <div class="reveal rounded-2xl overflow-hidden border {{ openFaq() === i ? 'border-[#c9a86a]/60 bg-[#14141f]' : 'border-white/10 bg-white/[0.02]' }} transition">
+        <button (click)="toggleFaq(i)" class="w-full flex items-center justify-between gap-4 text-left px-6 py-5">
+          <span class="font-display font-bold text-[15px] md:text-base">{{ f.q }}</span>
+          <span class="text-[#c9a86a] text-xl shrink-0">{{ openFaq() === i ? '−' : '+' }}</span>
+        </button>
+        @if (openFaq() === i) {
+          <p class="px-6 pb-6 text-sm text-[#ede6d6]/65 leading-relaxed">{{ f.a }}</p>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="relative max-w-7xl mx-auto px-5 pb-20">
+  <div class="reveal relative rounded-[2rem] overflow-hidden border border-[#c9a86a]/40 bg-gradient-to-br from-[#1a0f16] via-[#0a0a12] to-[#0d1a12] p-10 md:p-16 text-center">
+    <div class="smoke-layer"></div>
+    <div class="relative">
+      <div class="text-6xl">🎭</div>
+      <h2 class="font-display text-3xl md:text-5xl font-black mt-4">¿Te atrevés a <span class="gold-text">no ser vos</span> por una noche?</h2>
+      <p class="text-[#ede6d6]/60 text-sm mt-4 max-w-lg mx-auto">Cupo limitado. Cuando el reloj llegue a cero, la sala desaparece.</p>
+      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#entradas" class="btn-gold rounded-full px-9 py-4 text-sm font-bold">QUIERO MIS ENTRADAS</a>
+        <a [href]="whatsappUrl()" target="_blank" rel="noopener" class="btn-whatsapp rounded-full px-9 py-4 text-sm font-bold text-white">💬 {{ WHATSAPP_NUMBER }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/10 bg-black/60 py-10">
+  <div class="max-w-7xl mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">🎭</span>
+      <div>
+        <p class="font-display font-bold tracking-[0.3em] gold-text">KATRASKA</p>
+        <p class="text-[11px] text-white/40">Fiestas enmascaradas · Bahía Blanca · Desde 2022</p>
+      </div>
+    </div>
+    <div class="flex gap-6 text-xs tracking-[0.2em] text-white/50">
+      <a href="#evento" class="hover:text-[#c9a86a]">LA NOCHE</a>
+      <a href="#entradas" class="hover:text-[#c9a86a]">ENTRADAS</a>
+      <a href="#checkout" class="hover:text-[#c9a86a]">WHATSAPP</a>
+    </div>
+    <p class="text-[11px] text-white/30">© 2026 Katraska · Todos los secretos reservados 🖤</p>
+  </div>
+</footer>
