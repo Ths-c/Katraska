@@ -32,7 +32,7 @@
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 80% 55% at 50% 38%, rgba(139,30,46,0.22), transparent 70%), radial-gradient(ellipse 60% 40% at 50% 110%, rgba(201,168,106,0.12), transparent 70%)"></div>
 
   <div class="relative z-10 max-w-5xl mx-auto px-5 text-center">
-    <p class="reveal text-[11px] md:text-xs tracking-[0.5em] text-[#c9a86a] mb-6">ORGANIZADOR DE FIESTAS · MONTE HERMOSO</p>
+    <p class="reveal text-[11px] md:text-xs tracking-[0.5em] text-[#c9a86a] mb-6">MONTE HERMOSO</p>
 
     <!-- ANTIFAZ SVG -->
     <div class="reveal flex justify-center mb-6">
@@ -91,7 +91,7 @@
 
 <!-- CINTA -->
 <div class="border-y border-[#c9a86a]/20 bg-[#0d0d16] py-3 overflow-hidden whitespace-nowrap text-[12px] tracking-[0.35em] text-[#c9a86a]/80">
-  <div class="inline-block animate-pulse">🎭 NOCHE DE MÁSCARAS &nbsp;·&nbsp; MONTE HERMOSO · OCTUBRE &nbsp;·&nbsp; BARRA &nbsp;·&nbsp; DJS TODA LA NOCHE &nbsp;·&nbsp; KATRASKA &nbsp;·&nbsp; CONSEGUÍ TU ENTRADA &nbsp;·&nbsp;</div>
+  <div class="inline-block animate-pulse">🎭 NOCHE DE MÁSCARAS &nbsp;·&nbsp; MONTE HERMOSO · OCTUBRE &nbsp;·&nbsp; BARRA &nbsp;·&nbsp; DJ TODA LA NOCHE &nbsp;·&nbsp; KATRASKA &nbsp;·&nbsp; CONSEGUÍ TU ENTRADA &nbsp;·&nbsp;</div>
 </div>
 
 <!-- EVENTO -->
@@ -107,7 +107,7 @@
         <p>🌙 Pista principal · Barra toda la noche · DJ</p>
       </div>
       <div class="relative mt-6 flex flex-wrap gap-2 text-[11px]">
-        <span class="px-3 py-1 rounded-full border border-[#c9a86a]/40 text-[#c9a86a]">+18 con DNI</span>
+        <span class="px-3 py-1 rounded-full border border-[#c9a86a]/40 text-[#c9a86a]">+23 con DNI</span>
         <span class="px-3 py-1 rounded-full border border-[#c9a86a]/40 text-[#c9a86a]">Llevar antifaz</span>
         <span class="px-3 py-1 rounded-full border border-[#c9a86a]/40 text-[#c9a86a]">Cupos limitados</span>
       </div>
@@ -285,14 +285,16 @@
   <h2 class="reveal text-center font-display text-4xl md:text-5xl font-black mt-3">Antes de <span class="gold-text">enmascararte</span></h2>
   <div class="mt-10 space-y-3">
     @for (f of faqs; track f.q; let i = $index) {
-      <div class="reveal rounded-2xl overflow-hidden border {{ openFaq() === i ? 'border-[#c9a86a]/60 bg-[#14141f]' : 'border-white/10 bg-white/[0.02]' }} transition">
-        <button (click)="toggleFaq(i)" class="w-full flex items-center justify-between gap-4 text-left px-6 py-5">
+      <div class="reveal rounded-2xl overflow-hidden border transition-colors duration-300 {{ openFaq() === i ? 'border-[#c9a86a]/60 bg-[#14141f]' : 'border-white/10 bg-white/[0.02]' }}">
+        <button (click)="toggleFaq(i)" [attr.aria-expanded]="openFaq() === i" class="w-full flex items-center justify-between gap-4 text-left px-6 py-5">
           <span class="font-display font-bold text-[15px] md:text-base">{{ f.q }}</span>
-          <span class="text-[#c9a86a] text-xl shrink-0">{{ openFaq() === i ? '−' : '+' }}</span>
+          <span class="faq-icon text-[#c9a86a] text-2xl font-light leading-none shrink-0 {{ openFaq() === i ? 'open' : '' }}">+</span>
         </button>
-        @if (openFaq() === i) {
-          <p class="px-6 pb-6 text-sm text-[#ede6d6]/65 leading-relaxed">{{ f.a }}</p>
-        }
+        <div class="faq-answer {{ openFaq() === i ? 'open' : '' }}">
+          <div class="overflow-hidden min-h-0">
+            <p class="px-6 pb-6 text-sm text-[#ede6d6]/65 leading-relaxed">{{ f.a }}</p>
+          </div>
+        </div>
       </div>
     }
   </div>

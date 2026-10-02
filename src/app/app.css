@@ -3,3 +3,26 @@
   display: block;
   background: #07070c;
 }
+
+/* FAQ accordion: anima alto + opacidad al abrir/cerrar */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s ease;
+}
+.faq-answer.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* Icono + que rota a × al abrir */
+.faq-icon {
+  display: inline-block;
+  transition: transform 0.35s ease, color 0.35s ease;
+}
+.faq-icon.open {
+  transform: rotate(45deg);
+}

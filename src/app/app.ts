@@ -36,7 +36,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       tagline: 'Para vivir la noche completa',
       price: 10000,
       mask: '🎭',
-      benefits: ['Acceso toda la noche 12 en adelante', 'DJs toda la noche'],
+      benefits: ['Acceso toda la noche de 12 en adelante', 'DJ toda la noche', 'Cotillón', 'Sorpresas durante la noche'],
     },
   ]);
 

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fondo blanco: zona de seguridad para que el QR no falle -->
+  <rect width="512" height="512" rx="112" fill="#ffffff"/>
+  <!-- Pastilla negra marca Katraska -->
+  <rect x="36" y="36" width="440" height="440" rx="100" fill="#07070c"/>
+  <rect x="36" y="36" width="440" height="440" rx="100" fill="none" stroke="#c9a86a" stroke-width="16"/>
+  <!-- Antifaz simplificado: trazo grueso, sin filigrana fina -->
+  <g transform="translate(256 236)">
+    <path d="M -158 -10 C -108 -92, -48 -94, 0 -38 C 48 -94, 108 -92, 158 -10 C 108 58, 48 50, 0 12 C -48 50, -108 58, -158 -10 Z"
+      fill="#0d0d16" stroke="#c9a86a" stroke-width="18" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Ojos en blanco para que se lean a 1cm -->
+    <ellipse cx="-72" cy="-8" rx="46" ry="30" fill="#ffffff" stroke="#c9a86a" stroke-width="10"/>
+    <ellipse cx="72" cy="-8" rx="46" ry="30" fill="#ffffff" stroke="#c9a86a" stroke-width="10"/>
+    <!-- Punto rojo central marca -->
+    <circle cx="0" cy="18" r="18" fill="#8b1e2e" stroke="#f0d9a8" stroke-width="7"/>
+  </g>
+  <!-- K gigante legible incluso a 64px -->
+  <text x="256" y="428" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-size="112" font-weight="900" letter-spacing="6" fill="#c9a86a">K</text>
+</svg>
