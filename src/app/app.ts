@@ -28,6 +28,16 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   readonly EVENT_DATE_LABEL = 'Octubre 2026 · Monte Hermoso';
   readonly EVENT_VENUE = 'Monte Hermoso';
   readonly EVENT_TARGET = new Date('2026-10-17T23:59:00-03:00').getTime();
+  // ── Pantalla de espera: la página se activa sola al llegar la hora ──
+  readonly LAUNCH_AT = new Date('2026-10-03T00:00:00-03:00').getTime();
+  readonly LAUNCH_LABEL = '3 de octubre · 00:00hs';
+
+  isLaunched = signal(false);
+  lDays = signal(0);
+  lHours = signal(0);
+  lMinutes = signal(0);
+  lSeconds = signal(0);
+  private scrollLocked = false;
 
   tickets = signal<Ticket[]>([
     {
@@ -116,7 +126,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;
-    this.initParticles();
+    this.initParticles('dust');
+    this.initParticles('dust-gate');
     this.observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
       { threshold: 0.12 }
@@ -127,14 +138,30 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     if (this.timer) clearInterval(this.timer);
     this.observer?.disconnect();
+    try { document.body.style.overflow = ''; } catch { /* noop */ }
   }
 
   private tick() {
-    const diff = Math.max(0, this.EVENT_TARGET - Date.now());
+    const now = Date.now();
+    const diff = Math.max(0, this.EVENT_TARGET - now);
     this.days.set(Math.floor(diff / 86400000));
     this.hours.set(Math.floor((diff / 3600000) % 24));
     this.minutes.set(Math.floor((diff / 60000) % 60));
     this.seconds.set(Math.floor((diff / 1000) % 60));
+    // contador de apertura
+    const launched = now >= this.LAUNCH_AT;
+    this.isLaunched.set(launched);
+    const ldiff = Math.max(0, this.LAUNCH_AT - now);
+    this.lDays.set(Math.floor(ldiff / 86400000));
+    this.lHours.set(Math.floor((ldiff / 3600000) % 24));
+    this.lMinutes.set(Math.floor((ldiff / 60000) % 60));
+    this.lSeconds.set(Math.floor((ldiff / 1000) % 60));
+    // bloquear scroll mientras se muestra la espera
+    const shouldLock = !launched;
+    if (shouldLock !== this.scrollLocked) {
+      this.scrollLocked = shouldLock;
+      try { document.body.style.overflow = shouldLock ? 'hidden' : ''; } catch { /* noop */ }
+    }
   }
 
   inc(id: string) {
@@ -197,8 +224,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.openFaq.set(this.openFaq() === i ? null : i);
   }
 
-  private initParticles() {
-    const canvas = document.getElementById('dust') as HTMLCanvasElement | null;
+  private initParticles(id: string) {
+    const canvas = document.getElementById(id) as HTMLCanvasElement | null;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;

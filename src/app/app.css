@@ -4,6 +4,23 @@
   background: #07070c;
 }
 
+/* Pantalla de espera: cubre todo hasta la hora de apertura */
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #07070c;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gate-in 0.8s ease;
+}
+@keyframes gate-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* FAQ accordion: anima alto + opacidad al abrir/cerrar */
 .faq-answer {
   display: grid;
